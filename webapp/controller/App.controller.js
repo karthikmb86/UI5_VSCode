@@ -8,38 +8,10 @@ sap.ui.define(
   (Controller, MessageToast, JSONModel, ResourceModel) => {
     "use strict"; //To detect coding issues
     return Controller.extend("sap.ui.demo.walkthrough.controller.App", {
-      onInit: function () {
-        // set data model on view
-        let oData = {
-          recipient: {
-            name: "World",
-          },
-        };
-        let oModel = new JSONModel(oData);
-        this.getView().setModel(oModel);
-
-        // set i18n model on view
-        let i18nModel = new ResourceModel({
-          bundleName: "sap.ui.demo.walkthrough.i18n.i18n",
-          supportedLocales: [""],
-          fallbackLocale: "",
-        });
-        this.getView().setModel(i18nModel, "i18n");
-      },
-      onShowHello: function () {
-        // read msg from i18n model
-        let oBundle = this.getView().getModel("i18n").getResourceBundle();
-        let sRecipient = this.getView()
-          .getModel()
-          .getProperty("/recipient/name");
-        let sMsg = oBundle.getText("helloMsg", [sRecipient]);
-        // show message
-        MessageToast.show(sMsg);
-
-        //MessageToast.show("Hello There");
-        // show a native JavaScript alert
-        //alert("Hello World from controller");
-      },
+      //on show hello function is now moved to the nested HelloPanel controller
+      onOpenDialog : function () {
+        this.getOwnerComponent().openHelloDialog();
+      }
     });
   }
 );
